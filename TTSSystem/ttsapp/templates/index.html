@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    .container {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container1 {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      float: left;
+      left: 20.7%;
+    }
+
+    .container2 {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      float: right;
+
+    }
+  </style>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="pragma" content="no-cache">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Online Mizo Text To Speech Synthesis System</title>
+
+  <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="static/css/animate.css">
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light" id="navBar">
+    <div style="float:left;width:100%; padding-left: 100px">
+      <img src="static/img/iitg_logo.png" height="100px" style="float:left; padding-left:10">
+      <div style="float:left;padding-left: 10px">
+        <h4>
+          <font color="green" size="6.5"><b><br>Mizo Text to Speech Synthesis System</b></font>
+        </h4>
+      </div>
+    </div>
+  </nav>
+  <center><br>
+    <div style="float:left;width:40%; padding-left: 100px; padding-top: 40px">
+      <div class="row">
+
+        <div class="col-lg-11">
+          <div id="demoVoice" class="demoVoice fadeIn animated">
+
+
+            <textarea name="text" id="textInput" placeholder="Enter your text ..."></textarea>
+            <span><br>(Max 30 characters allowed)</span>
+
+            <audio style="display:none;" id="audiotag1" controls="controls">
+              <source id="audiosrc" src="">
+            </audio>
+            <button class="defBtn" id="submit-voice" onclick="sendText()">Synthesize</button>
+            <button class="defBtn" onclick="" value="Pause" id="apifileplay" title="Pause"
+              style="display: none;visibility: hidden;"></button>
+            <p><br><a href="" target="_blank"></a></p>
+
+          </div><br><br>
+          <!--<b>Built with speech resources from the <a href="https://www.iitm.ac.in/donlab/tts/synthDocs.php" target="_blank">Indic TTS, IIT Madras</a></b>-->
+
+
+        </div>
+      </div>
+    </div>
+  </center>
+
+  <div style="float:left;width:40%;padding-left: 130px">
+
+
+    <img src="static/img/imprint_logo.png" height="120">
+    <br>
+    <br>Developed at the Center for Linguistic Science and Technology (CLST), IIT Guwahati and funded under the IMPRINT
+    program by MHRD and MeITY, for a consortium project titled <i>Development of Speech Interface for Form-filling
+      application (SiFA) in Five Indian
+      Languages</i>. For more details <a href="https://www.sifaproject.org" target="_blank">click here</a>.
+    <br><br>
+    <b>Built with speech resources from <a href="https://www.iitm.ac.in/donlab/tts/synthDocs.php" target="_blank">Indic
+        TTS, IIT Madras</a></b>
+
+    <br><br><b>Technical details and citation:</b><br>
+    <div>
+      <font size="2.5" color="#444342">Abhash Deka, Priyankoo Sarmah, Samudravijaya K, S.R.M Prasanna, "<b><a
+            href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8732262">Development of Assamese Text-to-speech
+            System using Deep Neural Network</b>"</a>, <i>2019 Twenty Fifth National Conference on Communications (NCC),
+          Bangalore, India, 2019.</i></font>
+    </div> <br>
+    <b>Bibtex</b><br>
+    <code>@inproceedings{asm_tts,<br>
+  title={Development of Assamese Text-to-speech System using Deep Neural Network},<br>
+  author={Deka, Abhash and Sarmah, Priyankoo and Samudravijaya, K and Prasanna, SRM},<br>
+  booktitle={2019 National Conference on Communications (NCC)},<br>
+  pages={1--5},<br>
+  year={2019},<br>
+  organization={IEEE}<br>
+}
+</code>
+  </div>
+  <!-- <div style="float:left;width:100%;padding-left: 100px">
+<b>Built with speech resources from the <a href="https://www.iitm.ac.in/donlab/tts/synthDocs.php" target="_blank">Indic TTS, IIT Madras</a></b>
+</div>
+   
+  <div style="float:left;width:58%;padding-left: 100px"><br><b>Technical details and citation:</b><br>
+<font size="2.5">Abhash Deka, Priyankoo Sarmah, Samudravijaya K, S.R.M Prasanna, "Development of Assamese Text-to-speech System using Deep Neural Network," <i>2019 Twenty Fifth National Conference on Communications (NCC), Bangalore, India, 2019</i></font>
+</div>-->
+  <script>
+
+    function sendText() {
+      const textInput = document.getElementById('textInput').value;
+      if (!textInput) {
+        alert('Please enter text.');
+        return;
+      }
+
+      $.ajax({
+        type: 'POST',
+        url: 'tts_in', // Replace with your Django API endpoint
+        data: { text: textInput },
+        success: function (response) {
+
+          alert('audio received');
+          if (response.audio_path) {
+            alert('response.audio_path');
+            playAudio(response.audio_path);
+          } else {
+            alert('Error: Unable to generate audio.');
+          }
+        },
+        error: function (error) {
+          alert('Error: ' + error.responseText);
+        }
+      });
+    }
+
+    function playAudio(audioPath) {
+      const audio = new Audio(audioPath);
+      audio.play();
+    }
+
+  </script>
+</body>
+
+</html>
