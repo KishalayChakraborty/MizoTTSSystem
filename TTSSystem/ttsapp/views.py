@@ -42,14 +42,15 @@ import KWS_denseNet as KWS_miz
 def tts_in(request):
     if request.method == 'POST':
         try:
-            run_mizo_TTS( 'static/572505.txt','static/572505.wav')
+            #run_mizo_TTS( 'static/572505.txt','static/572505.wav')
             text = request.POST.get('text', '')
             if not text:
                 return JsonResponse({'error': 'Text parameter is required.'}, status=400)
             with open("input.txt", "w") as file: file.write(text)
+            run_mizo_TTS( "input.txt",'static/testop.wav')
             
 
-            return JsonResponse({'audio_path': "static/572505.wav"})
+            return JsonResponse({'audio_path': "static/testop.wav"})
 
             return JsonResponse({'error': 'No TTS response from Wit.ai'}, status=500)
 

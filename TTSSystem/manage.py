@@ -3,7 +3,7 @@
 import os
 import sys
 
-# python manage.py runsslserver 0.0.0.0:8000 --cert your_certificate.crt --key your_private.key
+# python manage.py runsslserver 0.0.0.0:8005 --cert your_certificate.crt --key your_private.key
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TTSSystem.settings')

@@ -1,16 +1,13 @@
-
-
 wget https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
 chmod 775 Anaconda3-2024.02-1-Linux-x86_64.sh
 ./Anaconda3-2024.02-1-Linux-x86_64.sh 
 
 cd /dataspace/diskspace/Anaconda 
 conda env create -f try.yml
-conda env create -f condaHome_KLU.yml 
+conda env create -f condaHome_KLU.yml
 
 conda activate tts
 conda activate condatts
-      
 
 conda install anaconda::django 
 pip install django pydub
@@ -29,4 +26,17 @@ cd glibc-2.29/build
 make 
 make install
 ldd --version
- export LD_LIBRARY_PATH=/opt/glibc
+export LD_LIBRARY_PATH=/opt/glibc
+
+../configure --prefix=/home/cyberithub/glibc-2.29/glibc-build
+make
+sudo make install
+
+
+pip install numpy
+pip install scipy
+pip install configobj
+pip install scikit-learn
+pip install regex
+pip install lxml
+pip install argparse
