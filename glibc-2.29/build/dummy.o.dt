@@ -1,0 +1,17 @@
+/home/clst_wk/Documents/MizoTTSSystem/glibc-2.29/build/dummy.o: \
+ /home/clst_wk/Documents/MizoTTSSystem/glibc-2.29/build/dummy.c \
+ ../include/stdc-predef.h \
+ /home/clst_wk/Documents/MizoTTSSystem/glibc-2.29/build/libc-modules.h \
+ ../include/libc-symbols.h \
+ /home/clst_wk/Documents/MizoTTSSystem/glibc-2.29/build/config.h \
+ ../sysdeps/generic/symbol-hacks.h
+
+../include/stdc-predef.h:
+
+/home/clst_wk/Documents/MizoTTSSystem/glibc-2.29/build/libc-modules.h:
+
+../include/libc-symbols.h:
+
+/home/clst_wk/Documents/MizoTTSSystem/glibc-2.29/build/config.h:
+
+../sysdeps/generic/symbol-hacks.h:

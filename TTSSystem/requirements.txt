@@ -4,16 +4,13 @@ wget https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
 chmod 775 Anaconda3-2024.02-1-Linux-x86_64.sh
 ./Anaconda3-2024.02-1-Linux-x86_64.sh 
 
-cd /dataspace/diskspace/Anaconda
-conda activate myenv
+cd /dataspace/diskspace/Anaconda 
+conda env create -f try.yml
+conda env create -f condaHome_KLU.yml 
 
-conda create --name myenv python=3.9
-conda activate myenv
-conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=11.1 -c pytorch -c nvidia
-
-pip install tensorboard_logger  
-pip install --upgrade "protobuf<=3.20.1" 
-pip install librosa     
+conda activate tts
+conda activate condatts
+      
 
 conda install anaconda::django 
 pip install django pydub
@@ -21,3 +18,15 @@ sudo apt-get install ffmpeg
 sudo apt-get install libav-tools
 
 pip install django-sslserver
+
+
+sudo apt-get install bison
+wget -c https://ftp.gnu.org/gnu/glibc/glibc-2.29.tar.gz
+tar -zxvf glibc-2.29.tar.gz
+mkdir glibc-2.29/build
+cd glibc-2.29/build
+../configure --prefix=/opt/glibc29
+make 
+make install
+ldd --version
+ export LD_LIBRARY_PATH=/opt/glibc
